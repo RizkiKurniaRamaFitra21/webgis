@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Layers Control Tutorial - Leaflet</title>
+
+  <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .leaflet-container {
+      height: 1080px;
+      width: 1080px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  </style>
+
+
+</head>
+<body>
+
+<div id='map'></div>
+
+<script>
+
+  const store = L.layerGroup();
+
+  const Online = L.marker([-0.0696743,109.3525388]).bindPopup('This is Littleton, CO.').addTo(store);
+  const Alibaba  = L.marker([-0.0679655,109.3404956]).bindPopup('This is Denver, CO.').addTo(store);
+  const  Oleng = L.marker([-0.0606431,109.3478488]).bindPopup('This is Aurora, CO.').addTo(store);
+
+
+  const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+  const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+  const streets = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+  const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  });
+
+  const map = L.map('map', {
+    center: [-0.059422832712802784, 109.35218417158659],
+    zoom: 10,
+    layers: [osm, store]
+  });
+
+  const baseLayers = {
+    'OpenStreetMap': osm,
+    'Streets': store
+  };
+
+  const overlays = {
+    'Cities': store
+  };
+
+  const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+  const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
+  const rubyHill = L.marker([39.68, -105.00]).bindPopup('This is Ruby Hill Park.');
+
+  const parks = L.layerGroup([crownHill, rubyHill]);
+
+  const satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+  layerControl.addBaseLayer(satellite, 'Satellite');
+  layerControl.addOverlay(parks, 'Parks');
+
+  var polygon = L.polygon([
+    [-0.060235, 109.350316],
+    [-0.0678904,109.3426695],
+    [-0.069162, 109.353202],
+    [-0.059339,109.3500016]
+  ]).addTo(map);
+
+  var ruteA = L.polyline([
+    [-0.060235, 109.350316],
+    [-0.0678904,109.3426695],
+    [-0.069162, 109.353202],
+    [-0.059333, 109.352490]
+  ], {color: 'red'})
+  ruteB = L.polyline([
+    [-0.060235, 109.350316],
+    [-0.0678904,109.3426695],
+    [-0.069162, 109.353202],
+    [-0.059378, 109.352544]
+  ], {color: 'yellow'})
+  ruteC = L.polyline([
+    [-0.059306, 109.352504],
+    [-0.058384, 109.351787],
+    [-0.068693, 109.343252],
+    [-0.0677965,109.3418358]
+  ], {color: 'green'});
+  var routes = L.layerGroup([ruteA, ruteB, ruteC]);
+  layerControl.addOverlay(routes, "Rute dari UM Pontianak");
+
+
+
+  var imageUrl = 'img/kampus.jpg';
+  var errorOverlayUrl = 'https://cdn-icons-png.flaticon.com/512/110/110686.png';
+  var altText = 'Universitas Muhammadiyah Pontianak';
+  var latLngBounds = L.latLngBounds([
+          [-0.0595198,109.3525895],
+          [-0.0595198,109.3525895]
+  ]);
+
+  var imageOverlay = L.imageOverlay(imageUrl, latLngBounds, {
+    opacity: 0.8,
+    errorOverlayUrl: errorOverlayUrl,
+    alt: altText,
+    interactive: true
+  }).addTo(map);
+
+  var videoUrls = [
+          '/vids/schhol.mp4'
+  ];
+
+  var errorOverlayUrl = 'https://cdn-icons-png.flaticon.com/512/110/110686.png';
+  var latLngBounds = L.latLngBounds([
+    [-0.0595198,109.3525895],
+    [-0.0595198,109.3525895]
+  ]);
+
+  var videoOverlay = L.videoOverlay(videoUrls, latLngVideoBounds, {
+    opacity: 0.8,
+    errorOverlayUrl: errorVideoOverlayUrl,
+    interactive: true,
+    autoplay: true,
+    muted: true,
+    playsInline: true
+  }).addTo(map);
+
+</script>
+
+
+
+</body>
+</html>

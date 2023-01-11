@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Peta</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+
+    <style>
+        #map { height: 650px; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    map = L.map('map').setView([0.0353948,109.2491484],12);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    var marker = L.marker([-0.0410566,109.3159175]).addTo(map);
+    var marker = L.marker([-0.0500195,109.315378]).addTo(map);
+    var marker = L.marker([-0.019183,109.3138646]).addTo(map);
+    var marker = L.marker([-0.0470328,109.3227939]).addTo(map);
+    var marker = L.marker([-0.05122,109.2806493]).addTo(map);
+
+    var polygon = L.polygon([
+        [-0.321348, 109.421539],
+        [-0.315546, 109.429933],
+        [-0.319264, 109.435690],
+        [-0.299382, 109.463985],
+        [-0.059128, 109.366506],
+        [-0.158001, 109.709726],
+        [-0.126521, 109.900804],
+        [-0.332406, 109.595865],
+        [-0.392839, 109.492171]
+    ]).addTo(map);
+</script>
+</body>
+</html>
