@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "hospital",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "name": "Yos Soedarso" }, "geometry": { "type": "Point", "coordinates": [ 109.363207300344556, -0.06251165593311 ] } },
+{ "type": "Feature", "properties": { "id": 1, "name": "Anugrah Bunda Khatulistiwa" }, "geometry": { "type": "Point", "coordinates": [ 109.355093051173085, -0.061398062081869 ] } },
+{ "type": "Feature", "properties": { "id": 1, "name": "Mitra Medika" }, "geometry": { "type": "Point", "coordinates": [ 109.329127935148506, -0.037491145949636 ] } },
+{ "type": "Feature", "properties": { "id": 1, "name": "Bhayangkara Soedjarwo Pontianak" }, "geometry": { "type": "Point", "coordinates": [ 109.333861247165245, -0.040796593474477 ] } }
+]
+}
